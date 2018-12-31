@@ -1,10 +1,21 @@
 import UIKit
 import app
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, PhotoView {
+    
+    var isUpdating: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         label.text = Proxy().proxyHello()
+    }
+    
+    func showError(error: KotlinThrowable) {
+        <#code#>
+    }
+    
+    func onUpdate(data: PhotoResponse) {
+        <#code#>
     }
 
     override func didReceiveMemoryWarning() {

@@ -1,11 +1,5 @@
-plugins {
-    id 'kotlin-multiplatform' version '1.3.11'
-}
-repositories {
-    google()
-    jcenter()
-    mavenCentral()
-}
+apply plugin: 'kotlin-multiplatform'
+apply plugin: 'kotlinx-serialization'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 
@@ -24,18 +18,16 @@ android {
             minifyEnabled false
         }
     }
-}
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    packagingOptions {
+        exclude 'META-INF/*.kotlin_module'
+    }
 }
 
 kotlin {
     targets {
         fromPreset(presets.android, 'android')
+
         // This preset is for iPhone emulator
         // Switch here to presets.iosArm64 (or iosArm32) to build library for iPhone device
         fromPreset(presets.iosX64, 'ios') {
@@ -43,33 +35,40 @@ kotlin {
         }
     }
     sourceSets {
-        commonMain {
-            dependencies {
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
-            }
+        configure([androidMain]) {
+            dependsOn commonMain
         }
-        commonTest {
-            dependencies {
-        		implementation 'org.jetbrains.kotlin:kotlin-test-common'
-        		implementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
-            }
+        configure([iosMain]) {
+            dependsOn commonMain
         }
-        androidMain {
-            dependencies {
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib'
-            }
-        }
-        androidTest {
-            dependencies {
-                implementation 'org.jetbrains.kotlin:kotlin-test'
-                implementation 'org.jetbrains.kotlin:kotlin-test-junit'
-            }
-        }
-        iosMain {
-        }
-        iosTest {
+        configure([ios64Main]) {
+            dependsOn iosMain
         }
     }
+}
+
+dependencies {
+    commonMainImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutines_version"
+    commonMainImplementation "io.ktor:ktor-client-core:$ktor_version"
+    commonMainImplementation "io.ktor:ktor-client-json:$ktor_version"
+
+    androidMainImplementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidMainImplementation 'com.android.support:appcompat-v7:28.0.0'
+    androidMainImplementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    androidMainImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    androidMainImplementation "io.ktor:ktor-client-android:$ktor_version"
+    androidMainImplementation "io.ktor:ktor-client-json-jvm:$ktor_version"
+    androidMainImplementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
+
+    iosMainImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$coroutines_version"
+    iosMainImplementation "io.ktor:ktor-client-ios:$ktor_version"
+    iosMainImplementation "io.ktor:ktor-client-json-native:$ktor_version"
+    iosMainImplementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
+
+    commonTestImplementation 'org.jetbrains.kotlin:kotlin-test'
+    commonTestImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
+
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
 }
 
 // This task attaches native framework built from ios module to Xcode project

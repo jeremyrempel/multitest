@@ -9,4 +9,6 @@ pluginManagement {
 }
 rootProject.name = 'multitest'
 
+enableFeaturePreview('GRADLE_METADATA')
+
 include ':app'
