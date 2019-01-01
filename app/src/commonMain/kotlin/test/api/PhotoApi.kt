@@ -7,6 +7,7 @@ import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
 import io.ktor.http.takeFrom
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.serialization.json.JSON
 
 class PhotoApi {
@@ -28,15 +29,15 @@ class PhotoApi {
     }
 
     suspend fun getRandom(): PhotoResponse = client.get {
-        apiUrl("photos", "random")
+        apiUrl("photos/random")
     }
 
     fun close() = client.close()
 
-    private fun HttpRequestBuilder.apiUrl(vararg components: String) {
+    private fun HttpRequestBuilder.apiUrl(path: String) {
         url {
             takeFrom(endPoint)
-            path(components.asList())
+            encodedPath = path
             parameters["client_id"] = clientId
         }
     }
