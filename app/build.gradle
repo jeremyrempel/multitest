@@ -41,9 +41,9 @@ kotlin {
         configure([iosMain]) {
             dependsOn commonMain
         }
-        configure([ios64Main]) {
-            dependsOn iosMain
-        }
+//        configure([ios64Main]) {
+//            dependsOn iosMain
+//        }
     }
 }
 
