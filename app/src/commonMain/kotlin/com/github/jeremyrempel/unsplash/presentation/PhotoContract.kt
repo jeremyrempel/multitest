@@ -1,6 +1,6 @@
-package test.presentation
+package com.github.jeremyrempel.unsplash.presentation
 
-import test.api.PhotoResponse
+import com.github.jeremyrempel.unsplash.api.PhotoResponse
 
 interface PhotoView : BaseView {
     var isUpdating: Boolean

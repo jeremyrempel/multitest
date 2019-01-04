@@ -3,21 +3,32 @@ import app
 
 class ViewController: UIViewController, PhotoView {
     
+    lazy var presenter: PhotoPresenter = {
+        PhotoPresenter(
+            uiContext: UI() as KotlinCoroutineContext,
+            view: self
+        )
+    }()
+    
     var isUpdating: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        label.text = Proxy().proxyHello()
+        //label.text = Proxy().proxyHello()
+        
+        presenter.onRequestData()
     }
     
     func showError(error: KotlinThrowable) {
-        <#code#>
+        label.text = error.message
     }
     
     func onUpdate(data: PhotoResponse) {
-        <#code#>
+        let make = data.exif?.make ?? ""
+        
+        label.text = "id: \(data.id)\n exif.make: \(make)"
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

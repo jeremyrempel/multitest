@@ -5,10 +5,10 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
-import test.api.PhotoResponse
-import test.presentation.PhotoActions
-import test.presentation.PhotoPresenter
-import test.presentation.PhotoView
+import com.github.jeremyrempel.unsplash.api.PhotoResponse
+import com.github.jeremyrempel.unsplash.presentation.PhotoActions
+import com.github.jeremyrempel.unsplash.presentation.PhotoPresenter
+import com.github.jeremyrempel.unsplash.presentation.PhotoView
 import kotlin.properties.Delegates
 
 actual class Sample {

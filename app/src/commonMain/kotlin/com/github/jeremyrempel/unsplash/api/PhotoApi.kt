@@ -1,5 +1,7 @@
-package test.api
+package com.github.jeremyrempel.unsplash.api
 
+import com.github.jeremyrempel.unsplash.LogLevel
+import com.github.jeremyrempel.unsplash.log
 import io.ktor.client.HttpClient
 import io.ktor.client.features.ExpectSuccess
 import io.ktor.client.features.json.JsonFeature
@@ -7,13 +9,15 @@ import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
 import io.ktor.http.takeFrom
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.serialization.json.JSON
 
 class PhotoApi {
 
-    private val endPoint = "https://api.unsplash.com"
-    private val clientId = "7b62093f7803511c09584f0d978630a4ab3d5f1b3f5c70f97c30f6dbef25fdbf"
+    companion object {
+        internal val TAG = PhotoApi::class.toString()
+        internal const val endPoint = "https://api.unsplash.com"
+        internal const val clientId = "7b62093f7803511c09584f0d978630a4ab3d5f1b3f5c70f97c30f6dbef25fdbf"
+    }
 
     private val client by lazy {
         HttpClient {
@@ -29,6 +33,7 @@ class PhotoApi {
     }
 
     suspend fun getRandom(): PhotoResponse = client.get {
+        log(LogLevel.DEBUG, TAG, "Getting random photo from API")
         apiUrl("photos/random")
     }
 

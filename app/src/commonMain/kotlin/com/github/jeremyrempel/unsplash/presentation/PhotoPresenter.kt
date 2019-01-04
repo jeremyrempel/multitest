@@ -1,8 +1,8 @@
-package test.presentation
+package com.github.jeremyrempel.unsplash.presentation
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import test.api.PhotoApi
+import com.github.jeremyrempel.unsplash.api.PhotoApi
 import kotlin.coroutines.CoroutineContext
 
 class PhotoPresenter(
@@ -17,10 +17,13 @@ class PhotoPresenter(
     override fun onRequestData() = updateData()
 
     private fun updateData() {
+        view.isUpdating = true
+
         GlobalScope.launch(coroutineContext) {
             val api = PhotoApi()
-            view.isUpdating = true
-            view.onUpdate(api.getRandom())
+
+            val response = api.getRandom()
+            view.onUpdate(response)
         }.invokeOnCompletion {
             view.isUpdating = false
         }
