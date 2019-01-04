@@ -60,6 +60,9 @@ dependencies {
     androidMainImplementation "io.ktor:ktor-client-json-jvm:$ktor_version"
     androidMainImplementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
 
+    androidMainImplementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+
     iosMainImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$coroutines_version"
     iosMainImplementation "io.ktor:ktor-client-ios:$ktor_version"
     iosMainImplementation "io.ktor:ktor-client-json-native:$ktor_version"
