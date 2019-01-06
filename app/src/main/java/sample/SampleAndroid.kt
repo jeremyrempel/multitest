@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity(), PhotoView {
         Glide
             .with(this)
             .load(data.urls.thumb)
-            .thumbnail(.25f)
             .into(imageView)
     }
 
