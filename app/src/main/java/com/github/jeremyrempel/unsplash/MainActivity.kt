@@ -1,16 +1,16 @@
-package sample
+package com.github.jeremyrempel.unsplash
 
-import android.app.Application
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Dispatchers
 import com.github.jeremyrempel.unsplash.api.PhotoResponse
 import com.github.jeremyrempel.unsplash.presentation.PhotoActions
 import com.github.jeremyrempel.unsplash.presentation.PhotoPresenter
 import com.github.jeremyrempel.unsplash.presentation.PhotoView
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import sample.R
 import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity(), PhotoView {
@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity(), PhotoView {
         Glide
             .with(this)
             .load(data.urls.thumb)
+            .thumbnail(.25f)
             .into(imageView)
     }
 

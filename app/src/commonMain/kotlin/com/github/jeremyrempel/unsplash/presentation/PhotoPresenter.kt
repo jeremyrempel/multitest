@@ -1,8 +1,10 @@
 package com.github.jeremyrempel.unsplash.presentation
 
+import com.github.jeremyrempel.unsplash.api.PhotoApi
+import com.github.jeremyrempel.unsplash.di.kodein
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import com.github.jeremyrempel.unsplash.api.PhotoApi
+import org.kodein.di.erased.instance
 import kotlin.coroutines.CoroutineContext
 
 class PhotoPresenter(
@@ -10,9 +12,7 @@ class PhotoPresenter(
     val view: PhotoView
 ) : CoroutinePresenter(uiContext, view), PhotoActions {
 
-    fun onCreate() {
-
-    }
+    val api: PhotoApi by kodein.instance("Api")
 
     override fun onRequestData() = updateData()
 
@@ -20,8 +20,6 @@ class PhotoPresenter(
         view.isUpdating = true
 
         GlobalScope.launch(coroutineContext) {
-            val api = PhotoApi()
-
             val response = api.getRandom()
             view.onUpdate(response)
         }.invokeOnCompletion {

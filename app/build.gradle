@@ -51,6 +51,7 @@ dependencies {
     commonMainImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutines_version"
     commonMainImplementation "io.ktor:ktor-client-core:$ktor_version"
     commonMainImplementation "io.ktor:ktor-client-json:$ktor_version"
+    commonMainImplementation "org.kodein.di:kodein-di-erased:$kodein_version"
 
     androidMainImplementation fileTree(dir: 'libs', include: ['*.jar'])
     androidMainImplementation 'com.android.support:appcompat-v7:28.0.0'

@@ -1,7 +1,6 @@
 package com.github.jeremyrempel.unsplash.presentation
 
 import com.github.jeremyrempel.unsplash.LogLevel
-import com.github.jeremyrempel.unsplash.api.PhotoApi
 import com.github.jeremyrempel.unsplash.log
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
