@@ -10,10 +10,8 @@ Kotlin Multiplatform test prototype to validate the following functionalities:
 - Dependency Injection via Kodein
 - Logging via platform specific APIs
 
-### Notes:
-
-- IOS implementation incomplete (does not display image)
-
 ### Todo:
 
+- Investigate architecture patterns (Viper, unidirectional)
+- Expand threading
 - Persistence (SqlDelight)
