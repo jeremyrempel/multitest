@@ -27,10 +27,15 @@ class ViewController: UIViewController, PhotoView {
         let make = data.exif?.make ?? ""
         
         label.text = "id: \(data.id)\n exif.make: \(make)"
+        let imageURLString = data.urls.full
+        let url = URL(string: imageURLString)!
+        let data = try! Data(contentsOf: url)
+        imageView.image = UIImage(data: data)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
 }
