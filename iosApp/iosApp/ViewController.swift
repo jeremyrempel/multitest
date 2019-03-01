@@ -1,10 +1,10 @@
 import UIKit
 import app
 
-class ViewController: UIViewController, PhotoView {
+class ViewController: UIViewController, ListingView {
     
-    lazy var presenter: PhotoPresenter = {
-        PhotoPresenter(
+    lazy var presenter: ListingPresenter = {
+        ListingPresenter(
             uiContext: UI() as KotlinCoroutineContext,
             view: self
         )
@@ -23,14 +23,14 @@ class ViewController: UIViewController, PhotoView {
         label.text = error.message
     }
     
-    func onUpdate(data: PhotoResponse) {
-        let make = data.exif?.make ?? ""
+    func onUpdate(data: ListingResponse) {
+//        let make = data.exif?.make ?? ""
         
-        label.text = "id: \(data.id)\n exif.make: \(make)"
-        let imageURLString = data.urls.full
-        let url = URL(string: imageURLString)!
-        let data = try! Data(contentsOf: url)
-        imageView.image = UIImage(data: data)
+//        label.text = "id: \(data.id)\n exif.make: \(make)"
+//        let imageURLString = data.urls.full
+//        let url = URL(string: imageURLString)!
+//        let data = try! Data(contentsOf: url)
+//        imageView.image = UIImage(data: data)
     }
     
     override func didReceiveMemoryWarning() {

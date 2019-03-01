@@ -14,7 +14,7 @@ class PhotoApiService(private val client: HttpClient, private val endPoint: Stri
         internal val TAG = PhotoApiService::class.toString()
     }
 
-    override suspend fun getRandom(): PhotoResponse = client.get {
+    override suspend fun getListing(): PhotoResponse = client.get {
         log(LogLevel.DEBUG, TAG, "Getting random photo from API")
         apiUrl("photos/random")
     }
